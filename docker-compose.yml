@@ -1,0 +1,21 @@
+version: '2'
+services:
+  php:
+    image: yiisoftware/yii2-php:8.2-apache
+    restart: always
+    volumes:
+      - ./:/app
+    ports:
+      - '8000:80'
+  mariadb:
+    image: mariadb
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - 33060:3306
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
